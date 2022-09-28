@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <!-- input pour le message -->
+    <input type="text" id="message_input" />
+
+    <!-- bouton d'envoi -->
+    <button id="send_button">Envoyer</button>
+
+    <!-- liste des messages -->
+    <ul id="messages"></ul>
+  </body>
+
+  <!-- On importe la librairie client de Socket.io -->
+  <script src="/socket.io/socket.io.js"></script>
+
+  <!-- On importe notre fichier "script.js" du dossier "public" -->
+  <script src="/js/script.js" type="module"></script>
+</html>
