@@ -16,6 +16,12 @@ let socket = io();
 //id of self
 let clientId = "";
 
+function addMessage(text) {
+  let li = document.createElement("li");
+  li.textContent = text;
+  messagesContainer.appendChild(li);
+}
+
 //Evenement qui se déclenche au clic du bouton "Envoyer"
 sendButton.addEventListener("click", function () {
   //Si l'input du message n'est pas vide
@@ -26,10 +32,8 @@ sendButton.addEventListener("click", function () {
 });
 
 //On éxecute la fonction quand on reçois un message
-socket.on("message", function (message) {
-  let li = document.createElement("li");
-  li.textContent = message;
-  messagesContainer.appendChild(li);
+socket.on("message", function (id, message) {
+  addMessage(`${id}: ${message}`);
 });
 
 socket.on("client id", function (id) {
@@ -39,8 +43,12 @@ socket.on("client id", function (id) {
 
 socket.on("user joined", function (id) {
   if (id !== clientId) {
-    let li = document.createElement("li");
-    li.textContent = `${id} joined the chat`;
-    messagesContainer.appendChild(li);
+    addMessage(`${id} joined the chat`);
+  }
+});
+
+socket.on("user left", function (id) {
+  if (id !== clientId) {
+    addMessage(`${id} left the chat`);
   }
 });
