@@ -13,6 +13,9 @@ const usernameInput = document.querySelector("#username");
 //Se connecter au websocket de notre serveur
 let socket = io();
 
+//id of self
+let clientId = "";
+
 //Evenement qui se déclenche au clic du bouton "Envoyer"
 sendButton.addEventListener("click", function () {
   //Si l'input du message n'est pas vide
@@ -27,4 +30,17 @@ socket.on("message", function (message) {
   let li = document.createElement("li");
   li.textContent = message;
   messagesContainer.appendChild(li);
+});
+
+socket.on("client id", function (id) {
+  console.log(id);
+  clientId = id;
+});
+
+socket.on("user joined", function (id) {
+  if (id !== clientId) {
+    let li = document.createElement("li");
+    li.textContent = `${id} joined the chat`;
+    messagesContainer.appendChild(li);
+  }
 });
