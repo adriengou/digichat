@@ -1,5 +1,7 @@
 function connection(io, socket) {
   console.log(`User ${socket.id} connected`);
+  socket.emit("client id", socket.id);
+  io.emit("user joined", socket.id);
 
   //Socket io routes
   socket.on("message", function (message) {
