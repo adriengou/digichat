@@ -6,7 +6,7 @@
 
 [x] add sender id before the message
 
-[] add user joined info message
+[x] add user joined info message
 
 [] add user left info message
 
