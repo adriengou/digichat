@@ -1,19 +1,12 @@
+import config from "./config.js";
 import express from "express";
 import path from "path";
-
-//import dotenv
-import dotenv from "dotenv";
-//get the config from .env file
-dotenv.config();
 
 //http server import
 import http from "http";
 
 //import socket.io and create the server
 import { Server } from "socket.io";
-
-//routers imports
-import userRouter from "./routes/users_routes.js";
 
 //chat functions import
 import chat from "./chat.js";
@@ -37,8 +30,6 @@ app.get("/", function (req, res) {
   res.sendFile("public/index.html");
 });
 
-app.use("/users", userRouter);
-
 //SOCKET IO ROUTES--------------
 //when a user connects
 io.on("connection", function (socket) {
@@ -46,7 +37,6 @@ io.on("connection", function (socket) {
 });
 
 //------------------------------
-
-httpServer.listen(process.env.PORT, function () {
-  console.log(`Server running on port ${process.env.PORT}`);
+httpServer.listen(config.PORT, function () {
+  console.log(`Server running on port ${config.PORT}`);
 });
