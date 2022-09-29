@@ -8,7 +8,7 @@
 
 [x] add user joined info message
 
-[] add user left info message
+[x] add user left info message
 
 [] save messages in the database
 
