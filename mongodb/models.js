@@ -1,44 +1,72 @@
 import mongoose from "mongoose";
+import { isEmail } from "validator";
+
 const { Schema } = mongoose;
 
 //User
 const userSchema = new mongoose.Schema({
-  pseudo: String,
+  username: {
+    type: String,
+    required: true,
+  },
+
+  email: {
+    type: String,
+    required: true,
+    validate: [isEmail, "invalid email"],
+  },
+
+  password: {
+    type: String,
+    required: true,
+  },
+
+  roomsID: [Schema.Types.ObjectId],
+  messagesID: [Schema.Types.ObjectId],
 });
 const User = mongoose.model("User", userSchema);
 
 //Message
 const messageSchema = new mongoose.Schema({
-  name: String,
+  userID: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+
+  roomID: {
+    type: Schema.Types.ObjectId,
+    required: true,
+  },
+
+  date: {
+    type: Date,
+    required: true,
+  },
+
+  content: {
+    type: String,
+    required: true,
+  },
 });
 const Message = mongoose.model("Message", messageSchema);
 
 //Room
 const roomSchema = new mongoose.Schema({
-  name: String,
+  name: {
+    type: String,
+    required: true,
+  },
+
+  ownersID: {
+    type: [Schema.Types.ObjectId],
+    required: true,
+  },
+
+  usersID: {
+    type: [Schema.Types.ObjectId],
+    required: true,
+  },
 });
 const Room = mongoose.model("Room", roomSchema);
 
-// //User_Message
-// const kittySchema = new mongoose.Schema({
-//   name: String,
-// });
-// const Kitten = mongoose.model("Kitten", kittySchema);
-
-//User_join_Room
-const userJoinRoomSchema = new mongoose.Schema({
-  name: String,
-});
-const UserJoinRoom = mongoose.model("Kitten", userJoinRoomSchema);
-
-// //User_create_Room
-// const userCreateRoomSchema = new mongoose.Schema({
-//   name: String,
-// });
-// const UserCreateRoom = mongoose.model("Kitten", userCreateRoomSchema);
-
-// //Message_belongs_Room
-// const messageBelongsRoomSchema = new mongoose.Schema({
-//   name: String,
-// });
-// const MessageBelongsRoom = mongoose.model("MessageBelongsRoom", messageBelongsRoomSchema);
+export default { User, Message, Room };

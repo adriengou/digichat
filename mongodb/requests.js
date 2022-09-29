@@ -1,5 +1,3 @@
 //create a document
-const silence = new Kitten({ name: "Silence" });
-
-//save a document
-await silence.save();
+import { User, Room, Message } from "./models.js";
+export default {};
