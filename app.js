@@ -2,6 +2,9 @@ import config from "./config.js";
 import express from "express";
 import path from "path";
 
+import mongoose from "mongoose";
+await mongoose.connect(config.MONGO_URI);
+
 //http server import
 import http from "http";
 

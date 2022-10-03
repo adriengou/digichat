@@ -1,5 +1,5 @@
 //import mongo main.js to connect to the database
-import database from "./mongodb/main.js";
+import database from "./mongodb/requests.js";
 
 function connection(io, socket) {
   console.log(`User ${socket.id} connected`);
