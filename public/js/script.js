@@ -11,7 +11,7 @@ const messagesContainer = document.querySelector("#messages");
 const usernameInput = document.querySelector("#username");
 
 //Se connecter au websocket de notre serveur
-let socket = io();
+let socket = io("http://192.168.0.23:3001/");
 
 //id of self
 let clientId = "";
