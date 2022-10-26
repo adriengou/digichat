@@ -11,8 +11,12 @@ const messageSchema = new mongoose.Schema({
 
     roomID: {
         type: Schema.Types.ObjectId,
-        required: true,
         ref: "Room",
+    },
+
+    friendID:{
+        type: Schema.Types.ObjectId,
+        ref: "User",
     },
 
     date: {

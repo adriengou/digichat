@@ -9,17 +9,17 @@ const roomSchema = new mongoose.Schema({
         unique: true,
     },
 
-    ownersID: {
-        type: [Schema.Types.ObjectId],
+    ownersID: [{
+        type: Schema.Types.ObjectId,
         required: true,
         ref: "User",
-    },
+    }],
 
-    usersID: {
-        type: [Schema.Types.ObjectId],
+    usersID: [{
+        type: Schema.Types.ObjectId,
         required: true,
         ref: "User",
-    },
+    }],
 
     messagesID: [{ type: Schema.Types.ObjectId, ref: "Message" }],
 });
