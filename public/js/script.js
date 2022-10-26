@@ -52,3 +52,4 @@ socket.on("user left", function (id) {
     addMessage(`${id} left the chat`);
   }
 });
+
