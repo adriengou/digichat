@@ -100,13 +100,13 @@ export async function addUser(query) {
         dateOfBirth
     }
 
-    if (TEST){
-        let users = await User.find() || [];
-        let logUser = {...userData}
-        logUser.clearPassword = clearPassword
-        users.push(logUser)
-        await fs.promises.writeFile("users.json", JSON.stringify(users))
-    }
+    // if (TEST){
+    //     let users = await User.find() || [];
+    //     let logUser = {...userData}
+    //     logUser.clearPassword = clearPassword
+    //     users.push(logUser)
+    //     await fs.promises.writeFile("users.json", JSON.stringify(users))
+    // }
 
     let createdUser = await User.create(userData)
 
