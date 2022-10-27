@@ -96,7 +96,8 @@ export async function addUser(query) {
         firstName,
         lastName,
         skills,
-        token
+        token,
+        dateOfBirth
     }
 
     if (TEST){
