@@ -39,10 +39,8 @@ export async function addUser(query) {
         street,
         zipCode,
         phoneNumber,
-        //dialCode,
         firstName,
         lastName,
-        //dateOfBirth
     }
 
     //validate mail
