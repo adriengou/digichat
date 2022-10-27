@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import {SECRET, ADMIN_CODE} from "../config.js";
+import {SECRET} from "../config.js";
 import {getUserRole} from "../mongodb/controllers/user_controller.js";
 
 /**

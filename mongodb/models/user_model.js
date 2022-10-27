@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema({
     },
 
     zipCode:{
-      type:Number,
+      type:String,
       required:true
     },
 
@@ -87,6 +87,11 @@ const userSchema = new mongoose.Schema({
 
     avatar: {
         type:String,
+    },
+
+    dateOfBirth:{
+        type:Date,
+        required:true,
     },
 
     friendsID:[{ type: Schema.Types.ObjectId, ref: "User" }],

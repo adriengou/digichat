@@ -26,7 +26,8 @@ export async function addUser(query) {
         dialCode,
         firstName,
         lastName,
-        skills
+        skills,
+        dateOfBirth
     } = query
 
     let requiredFields = {
@@ -37,10 +38,11 @@ export async function addUser(query) {
         city,
         street,
         zipCode,
-        //phoneNumber,
-        //dialCode,
+        phoneNumber,
+        dialCode,
         firstName,
         lastName,
+        dateOfBirth
     }
 
     //validate mail
