@@ -42,7 +42,7 @@ export async function addUser(query) {
         //dialCode,
         firstName,
         lastName,
-        dateOfBirth
+        //dateOfBirth
     }
 
     //validate mail
