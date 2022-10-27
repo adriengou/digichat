@@ -39,7 +39,7 @@ export async function addUser(query) {
         street,
         zipCode,
         phoneNumber,
-        dialCode,
+        //dialCode,
         firstName,
         lastName,
         dateOfBirth

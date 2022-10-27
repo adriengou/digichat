@@ -6,19 +6,19 @@ import * as customValidator from "../custom_validators.js"
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
 
     email: {
         type: String,
-        required: true,
+        required: false,
         unique: true,
     },
 
     password: {
         type: String,
-        required: true,
+        required: false,
     },
 
     roomsID: [{ type: Schema.Types.ObjectId, ref: "Room" }],
@@ -35,42 +35,42 @@ const userSchema = new mongoose.Schema({
 
     country:{
         type:String,
-        required:true
+        required:false
     },
 
     city:{
         type:String,
-        required:true
+        required:false
     },
 
     street:{
         type:String,
-        required:true
+        required:false
     },
 
     zipCode:{
       type:String,
-      required:true
+      required:false
     },
 
     phoneNumber:{
         type:String,
-        required:true
+        required:false
     },
 
     dialCode:{
         type:String,
-        required:true
+        required:false
     },
 
     firstName:{
         type:String,
-        required:true
+        required:false
     },
 
     lastName:{
         type:String,
-        required:true
+        required:false
     },
 
     skills:[
@@ -81,7 +81,7 @@ const userSchema = new mongoose.Schema({
 
     role: {
         type:String,
-        required:true,
+        required:false,
         default: 'user'
     },
 
@@ -91,7 +91,7 @@ const userSchema = new mongoose.Schema({
 
     dateOfBirth:{
         type:Date,
-        required:true,
+        required:false,
     },
 
     friendsID:[{ type: Schema.Types.ObjectId, ref: "User" }],
