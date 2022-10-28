@@ -56,12 +56,15 @@ app.use(express.static("./public"));
 
 //middleware for logging every info about the received request
 app.use((req, res, next)=>{
-    console.warn('-------------------------------------')
+    console.warn('----------------HTTP REQUEST---------------------')
+    console.warn('date: ', new Date())
+    console.warn('ip:', req.ip)
     console.warn('url:', req.url)
+    console.warn('method: ', req.method)
     console.warn('params:', req.params)
     console.warn('headers:', req.headers)
     console.warn('body:', req.body)
-    console.warn('-------------------------------------')
+    console.warn('-------------------------------------------------')
     return next()
 })
 
