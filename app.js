@@ -41,6 +41,7 @@ const io = new Server(
     });
 
 //cors middleware
+app.options('*', cors()) // include before other routes
 app.use(cors())
 
 //json middleware
