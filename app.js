@@ -27,6 +27,7 @@ import { Server } from "socket.io";
 
 //chat functions import
 import chat from "./chat.js";
+import router from "./routes/message_api.js";
 
 let app = express();
 
@@ -52,6 +53,17 @@ app.use(express.urlencoded({ extended: false }));
 
 //static file serving
 app.use(express.static("./public"));
+
+//middleware for logging every info about the received request
+app.use((req, res, next)=>{
+    console.warn('-------------------------------------')
+    console.warn('url:', req.url)
+    console.warn('params:', req.params)
+    console.warn('headers:', req.headers)
+    console.warn('body:', req.body)
+    console.warn('-------------------------------------')
+    return next()
+})
 
 //redirect to routes
 app.use("/api/users", userApiRoute);

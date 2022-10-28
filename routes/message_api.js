@@ -12,10 +12,7 @@ const router = new Router()
 router.use(verifyToken)
 //ROUTES BELOW DO NEED AUTH
 
-router.use((req, res, next)=>{
-    console.warn(req.user, req.url, req.params, req.body)
-    return next()
-})
+
 
 router.post("/addfriendmessage", async (req, res)=>{
     let {username} = req.user
