@@ -141,6 +141,16 @@ export async function getUserByUsername(username, isAdmin){
     //prenom, nom, image
 }
 
+
+export async function getProfile(username){
+    if (!username){
+        return [false, "missing username param"]
+    }
+
+    let user = await User.findOne({username})
+    return [user, '']
+}
+
 export async function getAllUsernames(username) {
     if (!username){
         return [false, "missing username param"]

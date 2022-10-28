@@ -33,6 +33,17 @@ router.post("/login", async (req, res)=>{
 router.use(verifyToken)
 //ROUTES BELOW DO NEED AUTH
 
+router.get('profile', async (req, res)=>{
+    let {username} = req.user
+    let [result, error] = await userController.getProfile(username)
+
+    if(!result){
+        res.status(400).send(error)
+    }else{
+        res.status(200).json(result)
+    }
+})
+
 router.get('/friends', async (req, res)=>{
     let {username} = req.user
     let [result, error] = await userController.getFriends(username)
