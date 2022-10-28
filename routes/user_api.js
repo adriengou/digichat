@@ -44,6 +44,17 @@ router.get('/profile', async (req, res)=>{
     }
 })
 
+router.get('/updateprofile', async (req, res)=>{
+    let {username} = req.user
+    let [result, error] = await userController.updateUser(username)
+
+    if(!result){
+        res.status(400).send(error)
+    }else{
+        res.status(200).json(result)
+    }
+})
+
 router.get('/friends', async (req, res)=>{
     let {username} = req.user
     let [result, error] = await userController.getFriends(username)

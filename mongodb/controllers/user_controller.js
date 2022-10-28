@@ -185,7 +185,7 @@ export async function deleteUser(query) {
     return (await User.findOneAndDelete(query)) || false;
 }
 
-export async function updateUser(filter, update) {
+export async function updateUser(username, update) {
     let userData = {
         username: update.username,
         email: update.email,
@@ -199,8 +199,15 @@ export async function updateUser(filter, update) {
         firstName: update.firstName,
         lastName: update.lastName,
         skills: update.skills,
+        dateOfBirth: update.dateOfBirth,
+        avatar:update.avatar
     }
-    return (await User.findOneAndUpdate(filter, userData)) || false;
+    let user = await User.findOneAndUpdate({username}, userData)
+    if(!user){
+        return [false, 'user does not exists']
+    }
+
+    return [user, '']
 };
 
 export async function loginUser(email, password) {
