@@ -11,11 +11,14 @@ import {getUserRole} from "../mongodb/controllers/user_controller.js";
  */
 export function verifyToken(req, res, next){
     let token = req.headers["authorization"];
-    // console.log(req.headers)
-    token = token.split(" ")[1]
+
     if (!token) {
         return res.status(403).send("Forbidden");
     }
+
+    // console.log(req.headers)
+    token = token.split(" ")[1]
+
     try {
         const decoded = jwt.verify(token, SECRET);
         req.user = decoded;
