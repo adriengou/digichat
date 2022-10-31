@@ -29,9 +29,23 @@ router.post("/login", async (req, res)=>{
 })
 
 
+
+
 //ROUTES ABOVE DON'T NEED AUTH
 router.use(verifyToken)
 //ROUTES BELOW DO NEED AUTH
+
+//LOGOUT
+router.post("/logout", async (req, res)=>{
+    let {username} = req.user
+    let [user, error] = await userController.logoutUser(username)
+
+    if(!user){
+        res.status(400).send(error)
+    }else{
+        res.status(200).json(user)
+    }
+})
 
 router.get('/profile', async (req, res)=>{
     let {username} = req.user

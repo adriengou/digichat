@@ -265,6 +265,24 @@ export async function loginUser(email, password) {
     return [user, '']
 }
 
+export async function logoutUser(username) {
+
+    let user = await User.findOne({email});
+
+    if (!user) {
+        return [false, "User does not exist"];
+    }
+
+    user.token = ""
+
+    user.isLoggedIn = false
+    await user.save()
+
+
+    return [user, '']
+}
+
+
 
 export async function getUserRole(username){
     console.log(username)
