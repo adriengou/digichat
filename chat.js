@@ -37,6 +37,7 @@ function connection(io, socket) {
 function loadEvents(io, socket, username){
     //send friend message --------------------
     socket.on('send friend message', async (data) => {
+        socketLog(`message sent from ${username} to ${data.friendName}: ${data.content}`)
         let {friendName, content} = data
 
         const [result, error] = await messageController.addFriendMessage(username, friendName, content)
@@ -54,7 +55,7 @@ function loadEvents(io, socket, username){
             users[friendName].emit("friend message", {from: username, content})
         }
 
-        socketLog(`message sent from ${username} to ${friendName}`)
+
 
     })
 
