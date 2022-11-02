@@ -307,6 +307,9 @@ export async function addFriend(username, friendName){
         return [false, 'user not found']
     }
 
+    if(typeof friendName !== 'string'){
+        return [false, 'bad username format']
+    }
     let friend = await User.findOne({username: friendName})
     if(!friend){
         return [false, 'friend user not found']
