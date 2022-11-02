@@ -312,6 +312,14 @@ export async function addFriend(username, friendName){
         return [false, 'friend user not found']
     }
 
+
+    //check if the user is not already a friend
+    await user.populate('friendsID', 'username')
+    let isAlreadyFriend = user.friendsID.find(elem => elem.username === friend.username)
+    if(isAlreadyFriend){
+        return [false, 'user is already a friend']
+    }
+
     user.friendsID.push(friend)
     await user.save()
 
