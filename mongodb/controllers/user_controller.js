@@ -44,7 +44,7 @@ export async function addUser(query) {
 
     //validate mail
     if (!isEmail(email)) {
-        [false, "invalid email"];
+        return [false, "invalid email"];
     }
 
     //check if the email is already used
@@ -218,7 +218,7 @@ export async function loginUser(email, password) {
 
     //validate mail
     if (!isEmail(email)) {
-        [false, "invalid email"];
+        return [false, "invalid email"];
     }
 
     let clearPassword = password
