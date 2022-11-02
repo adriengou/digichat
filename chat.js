@@ -7,14 +7,21 @@ import * as userController from "./mongodb/controllers/user_controller.js";
 import * as roomController from "./mongodb/controllers/room_controller.js";
 
 let users = {}
-
+function socketLog(content){
+    console.log('---------------SOCKET-------------')
+    console.log(content)
+    console.log('----------------------------------')
+}
 function connection(io, socket) {
     socket.on('login', data => {
         let decoded
         try {
             decoded = jwt.verify(data.token, SECRET);
+            socketLog(`${decoded.username} has logged in`)
+            socket.emit('login success')
         } catch (err) {
             socket.emit('login error')
+            socketLog(`error: ${decoded.username} has logged out`)
             return
         }
 
@@ -25,6 +32,7 @@ function connection(io, socket) {
         loadEvents(io, socket, username)
     })
 }
+//{token:'qzdzd-z'}
 
 function loadEvents(io, socket, username){
     //send friend message --------------------
@@ -45,6 +53,8 @@ function loadEvents(io, socket, username){
         if(users[friendName]){
             users[friendName].emit("friend message", {from: username, content})
         }
+
+        socketLog(`message sent from ${username} to ${friendName}`)
 
     })
 
