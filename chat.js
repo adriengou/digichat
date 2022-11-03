@@ -87,6 +87,7 @@ function loadEvents(io, socket, username){
 
     socket.on('disconnect', ()=>{
         delete users[username]
+        io.emit('user disconnected', username)
     })
 }
 
