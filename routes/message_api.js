@@ -32,10 +32,11 @@ router.get("/friendmessages", async (req, res)=>{
     let {username} = req.user
 
     const [result, error] = await messageController.getUserMessages(username)
-    console.warn("message: ", result)
+
     if(!result){
         res.status(400).send(error)
     }else{
+        console.warn("message: ", result.length)
         res.status(200).json(result)
     }
 })
