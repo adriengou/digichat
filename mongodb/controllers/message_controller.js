@@ -48,10 +48,12 @@ export async function getUserMessages(username) {
 
     for (let message of user.sentMessagesID) {
         await message.populate('friendID', 'username')
+        await message.populate('userID', 'username')
     }
 
     for (let message of user.receivedMessagesID) {
         await message.populate('friendID', 'username')
+        await message.populate('userID', 'username')
     }
 
     user.sentMessagesID.map(async message => {

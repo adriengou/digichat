@@ -54,9 +54,6 @@ function loadEvents(io, socket, username){
         if(users[friendName]){
             users[friendName].emit("friend message", {from: username, content})
         }
-
-
-
     })
 
     socket.on('send room message', async (data) => {
