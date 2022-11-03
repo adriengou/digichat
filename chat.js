@@ -40,6 +40,10 @@ function loadEvents(io, socket, username){
         socketLog(`message sent from ${username} to ${data.friendName}: ${data.content}`)
         let {friendName, content} = data
 
+        if (!content || !friendName){
+            return
+        }
+
         const [result, error] = await messageController.addFriendMessage(username, friendName, content)
 
         if(!result){
