@@ -43,8 +43,18 @@ export async function getUserMessages(username) {
         return [false, 'no user found']
     }
 
-    await user.populate("sentMessagesID")
-    await user.populate("receivedMessagesID")
+    await user.populate({
+        path:"sentMessagesID",
+        options:{
+            limit:50
+        }
+    })
+    await user.populate({
+        path: "receivedMessagesID",
+        options: {
+            limit: 50
+        }
+    })
 
     for (let message of user.sentMessagesID) {
         await message.populate('friendID', 'username')
