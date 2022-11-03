@@ -68,6 +68,7 @@ export async function getUserMessages(username) {
 
     user.sentMessagesID.map(async message => {
         return {
+            from:message.userID,
             receiver: message.friendID,
             content: message.content,
             date: message.date
@@ -76,6 +77,7 @@ export async function getUserMessages(username) {
 
     user.receivedMessagesID.map(async message => {
         return {
+            from:message.friendID,
             receiver: message.userID,
             content: message.content,
             date: message.date
@@ -87,7 +89,47 @@ export async function getUserMessages(username) {
         sent: user.sentMessagesID
     }
 
-    return [allMessages, '']
+    //GET 50 MESSAGES PER USERS - 25 SENT / 25 RECEIVED
+    const OFFSET = 0
+    const LIMIT = 25
+    let sentMessagesPerUser = {}
+    let receivedMessagesPerUser = {}
+
+    let limitedMessages = {
+        received: [],
+        sent:[]
+    }
+    for (let i = 0; i < allMessages.received.length; i++) {
+        let message = allMessages.received[i]
+        let from = message.from.username
+
+        receivedMessagesPerUser[from] = receivedMessagesPerUser[from] || 0
+
+        if(receivedMessagesPerUser[from] >= LIMIT){
+            break;
+        }
+
+        limitedMessages.received.push(message)
+        receivedMessagesPerUser[from] = receivedMessagesPerUser[from] + 1
+    }
+
+    for (let i = 0; i < allMessages.sent.length; i++) {
+        let message = allMessages.sent[i]
+        let to = message.receiver.username
+
+        sentMessagesPerUser[to] = sentMessagesPerUser[to] || 0
+
+        if(sentMessagesPerUser[to] >= LIMIT){
+            break;
+        }
+
+        limitedMessages.sent.push(message)
+        sentMessagesPerUser[to] = sentMessagesPerUser[to] + 1
+    }
+
+
+
+    return [limitedMessages, '']
 }
 
 export async function addRoomMessage(username, roomName, content){
