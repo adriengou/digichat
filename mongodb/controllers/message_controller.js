@@ -46,13 +46,15 @@ export async function getUserMessages(username) {
     await user.populate({
         path:"sentMessagesID",
         options:{
-            limit:50
+            limit:50,
+            sort: { created: -1},
         }
     })
     await user.populate({
         path: "receivedMessagesID",
         options: {
-            limit: 50
+            limit: 50,
+            sort: { created: -1},
         }
     })
 
