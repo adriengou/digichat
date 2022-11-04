@@ -36,7 +36,36 @@ export async function addFriendMessage(username, friendName, content) {
     return [createdMessage, '']
 }
 
-export async function getUserMessages(username) {
+export async function getUserMessages(username, friendName) {
+    const LIMIT = 50
+    const OFFSET = 0
+
+    // get user
+    let user = await User.findOne({ username });
+    if(!user){
+        return [false, 'no user found']
+    }
+
+    let friend = await User.findOne({username:friendName})
+    if(!friend){
+        return [false, 'no friend found']
+    }
+    let query = {$or: [{userID: user._id, friendID: friend._id}, {userID: friend._id, friendID: user._id}]}
+    let messages = await Message.find(query, null, {limit:LIMIT, sort:{date:-1}})
+
+
+
+    for (const message of messages) {
+        await message.populate('userID', 'username')
+        await message.populate('friendID', 'username')
+    }
+
+    messages = messages.reverse()
+
+    return [messages, '']
+}
+
+export async function getAllUserMessages(username) {
     // get user
     let user = await User.findOne({ username });
     if(!user){

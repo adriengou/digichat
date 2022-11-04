@@ -41,6 +41,21 @@ router.get("/friendmessages", async (req, res)=>{
     }
 })
 
+router.get("/friendmessages/:friendName", async (req, res)=>{
+
+    let {username} = req.user
+    let {friendName} = req.params
+
+    const [result, error] = await messageController.getUserMessages(username, friendName)
+
+    if(!result){
+        res.status(400).send(error)
+    }else{
+        //console.warn("message: ", result)
+        res.status(200).json(result)
+    }
+})
+
 
 router.post("/addroommessage", async (req, res)=>{
 
