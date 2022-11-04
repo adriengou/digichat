@@ -21,9 +21,9 @@ router.post("/addfriendmessage", async (req, res)=>{
     const [result, error] = await messageController.addFriendMessage(username, friendName, content)
 
     if(!result){
-        res.status(400).send(error)
+        res.status(400).send(error).end()
     }else{
-        res.status(200).json(result)
+        res.status(200).json(result).end()
     }
 })
 
@@ -31,7 +31,7 @@ router.get("/friendmessages", async (req, res)=>{
 
     let {username} = req.user
 
-    const [result, error] = await messageController.getUserMessages(username)
+    const [result, error] = await messageController.getAllUserMessages(username)
 
     if(!result){
         res.status(400).send(error)
@@ -42,7 +42,6 @@ router.get("/friendmessages", async (req, res)=>{
 })
 
 router.get("/friendmessages/:friendName", async (req, res)=>{
-
     let {username} = req.user
     let {friendName} = req.params
 
@@ -55,6 +54,10 @@ router.get("/friendmessages/:friendName", async (req, res)=>{
         res.status(200).json(result)
     }
 })
+
+
+
+
 
 
 router.post("/addroommessage", async (req, res)=>{
