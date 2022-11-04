@@ -52,11 +52,11 @@ function loadEvents(io, socket, username){
         }
 
         //send message to sender
-        socket.emit("friend message sent", data)
+        socket.emit("friend message sent", result)
 
         //send message to receiver
         if(users[friendName]){
-            users[friendName].emit("friend message", {from: username, content})
+            users[friendName].emit("friend message", result)
         }
     })
 
