@@ -36,9 +36,10 @@ export async function addFriendMessage(username, friendName, content) {
     friend.receivedMessagesID.push(createdMessage)
     await friend.save()
 
-    console.warn(createdMessage)
+    console.warn("#############################",createdMessage)
     await createdMessage.populate('friendID', 'username')
     await createdMessage.populate('userID', 'username')
+    console.warn("#############################",createdMessage)
 
     return [createdMessage, '']
 }
