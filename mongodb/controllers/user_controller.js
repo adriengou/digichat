@@ -315,6 +315,10 @@ export async function addFriend(username, friendName){
         return [false, 'friend user not found']
     }
 
+    //check if tarek is adding himself as friend
+    if(user._id === friend._id){
+        return [false, "tarek tu peux pas être ami avec toi-même"]
+    }
 
     //check if the user is not already a friend
     await user.populate('friendsID', 'username')

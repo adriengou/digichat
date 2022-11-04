@@ -50,6 +50,13 @@ export async function getUserMessages(username, friendName) {
     if(!friend){
         return [false, 'no friend found']
     }
+
+    //check if tarek is sending himself a message
+    if(user._id === friend._id){
+        return [false, "tarek tu peux pas envoyer des messages à toi-même"]
+    }
+
+
     let query = {$or: [{userID: user._id, friendID: friend._id}, {userID: friend._id, friendID: user._id}]}
     let messages = await Message.find(query, null, {limit:LIMIT, sort:{date:-1}})
 
