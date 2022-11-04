@@ -16,6 +16,11 @@ export async function addFriendMessage(username, friendName, content) {
         return [false, 'friend not found']
     }
 
+    //check if tarek is sending himself a message
+    if(user._id === friend._id){
+        return [false, "tarek tu peux pas envoyer des messages à toi-même"]
+    }
+
     let today = new Date()
 
     let createdMessage = await Message.create({
@@ -49,11 +54,6 @@ export async function getUserMessages(username, friendName) {
     let friend = await User.findOne({username:friendName})
     if(!friend){
         return [false, 'no friend found']
-    }
-
-    //check if tarek is sending himself a message
-    if(user._id === friend._id){
-        return [false, "tarek tu peux pas envoyer des messages à toi-même"]
     }
 
 
