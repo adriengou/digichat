@@ -29,7 +29,7 @@ function connection(io, socket) {
         users[username] = socket
 
         let usersList = Object.keys(users)
-        socket.emit('users list', usersList)
+        io.emit('users list', usersList)
 
         loadEvents(io, socket, username)
     })
@@ -91,6 +91,8 @@ function loadEvents(io, socket, username){
     socket.on('disconnect', ()=>{
         delete users[username]
         io.emit('user disconnected', username)
+        let usersList = Object.keys(users)
+        io.emit('users list', usersList)
     })
 }
 
