@@ -26,8 +26,10 @@ function connection(io, socket) {
         }
 
         let {username} = decoded
-
         users[username] = socket
+
+        let usersList = Object.keys(users)
+        socket.emit('users list', usersList)
 
         loadEvents(io, socket, username)
     })
